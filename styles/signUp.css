@@ -19,6 +19,11 @@ body {
   color: #fff;
 }
 
+input {
+  font-family: var(--header-font);
+  color: #fff;
+}
+
 .container {
   background-image: url(/images/loginPictures.jpg);
   background-repeat: no-repeat;
