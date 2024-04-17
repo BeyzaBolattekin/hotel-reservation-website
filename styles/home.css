@@ -66,9 +66,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: right;
-  gap: 10%;
+  gap: 8%;
+  padding: 10px;
   height: 100%;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .navbar img {
