@@ -67,6 +67,7 @@ h2 {
   text-align: left;
   margin: 10px;
   padding: 20px 10px;
+  cursor: pointer;
 }
 
 .core-card:hover {
