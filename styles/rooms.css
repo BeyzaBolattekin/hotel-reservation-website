@@ -38,6 +38,44 @@ input {
   filter: invert(1);
 }
 
+a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 20px;
+  font-family: var(--header-font);
+}
+
+li {
+  list-style: none;
+}
+
+.navbar {
+  background-color: #fff;
+  height: 80px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 15px;
+  padding: 0 20px;
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 8%;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.navbar img {
+  height: 80px;
+  width: 80px;
+  border-radius: 15px;
+}
+
 .formContainer {
   background-color: var(--primary-color);
   display: flex;
