@@ -12,13 +12,13 @@
   </head>
   <body>
     <div class="container">
-      <form action="/" class="login__form">
+      <form action="login.php" method="post" class="login__form">
         <h1>Login</h1>
         <div class="input__row">
           <span><i class="ri-user-3-line"></i></span>
           <div class="input__group">
-            <input type="text" placeholder=" " class="emailInput" />
-            <label for="name">Email</label>
+            <input type="text" placeholder=" " name="email" class="emailInput" />
+            <label for="email">Email</label>
           </div>
         </div>
         <div class="input__row">
@@ -29,13 +29,14 @@
               type="password"
               placeholder=" "
               class="passwordInput"
+              name="password"
             />
             <label for="password">Password</label>
           </div>
           <span id="password-eye"><i class="ri-eye-off-line"></i></span>
         </div>
-        <button class="login__btn">Login</button>
-        <div>Don't have an account? <a href="signUp.html">Register</a></div>
+        <button type="submit" class="login__btn">Login</button>
+        <div>Don't have an account? <a href="signUp.php">Register</a></div>
       </form>
     </div>
 
