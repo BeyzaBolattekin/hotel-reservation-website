@@ -5,10 +5,11 @@ session_start(); ?>
 <html lang="en">
 
 <head>
+  <script src="https://kit.fontawesome.com/b022f45a64.js" crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rooms</title>
-  <link rel="stylesheet" href="../css/rooms.css" />
+  <title>Core Features</title>
+  <link rel="stylesheet" href="../css/features.css" />
 </head>
 
 <body>
@@ -30,64 +31,63 @@ session_start(); ?>
 
     </ul>
   </nav>
-  <div class="formContainer">
-    <form class="roomForm">
-      <div class="arrivalDiv inputDiv">
-        <p>Arrival Date</p>
-        <input type="date" />
+  <div class="wrapper-container">
+    <div class="core-container">
+      <header id="features">FACILITIES</header>
+      <h1>Core Features</h1>
+      <div class="core-cards">
+        <div class="core-card">
+          <i class="fa-solid fa-bell-concierge"></i>
+          <h2>Accommodation</h2>
+          <p>
+            Choose from a selection of luxurious rooms and suites, each
+            tastefully designed to provide maximum comfort.
+          </p>
+        </div>
+        <div class="core-card">
+          <i class="fa-solid fa-utensils"></i>
+          <h2>Dining Options</h2>
+          <p>
+            Indulge your palate at our restaurants and bars. Experience fresh
+            seafood or cocktails while enjoying the sunset.
+          </p>
+        </div>
+        <div class="core-card">
+          <i class="fa-solid fa-spa"></i>
+          <h2>Services</h2>
+          <p>
+            Relax with our services, including a fitness center, infinity
+            pool, full-service massages and beauty treatments.
+          </p>
+        </div>
+        <div class="core-card">
+          <i class="fa-solid fa-handshake"></i>
+          <h2>Events</h2>
+          <p>
+            You can a corporate conference, intimate wedding, or family
+            reunion, we ensure a memorable experience for all guests.
+          </p>
+        </div>
+        <div class="core-card">
+          <i class="fa-solid fa-location-dot"></i>
+          <h2>Location</h2>
+          <p>
+            There is direct beach access and breathtaking sea views. Easily
+            accessible from the international airport.
+          </p>
+        </div>
+        <div class="core-card">
+          <i class="fa-solid fa-lock"></i>
+          <h2>Safety</h2>
+          <p>
+            Safety is our top priority. Our hotel maintains 24/7 security
+            surveillance, electronic keys, and fire safety systems.
+          </p>
+        </div>
       </div>
-      <div class="departureDiv inputDiv">
-        <p>Departure Date</p>
-        <input type="date" />
-      </div>
-      <div class="guestsDiv inputDiv">
-        <p>Guests</p>
-        <input type="number" />
-      </div>
-      <div class="checkBtn">
-        <button>Check Rooms</button>
-      </div>
-    </form>
+    </div>
   </div>
-  <div class="roomsContainer">
 
-
-    <?php
-    include("../pages/con_data.php");
-
-    $sql = "SELECT * FROM rooms";
-    $result = mysqli_query($connect, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-      while ($row = mysqli_fetch_assoc($result)) {
-        echo '<div class="roomCard ' . ($row['availability'] ? '' : 'unavailable') . '">';
-        echo '  <div class="roomImg">';
-        echo '    <img src="' . htmlspecialchars($row['img']) . '" alt="' . htmlspecialchars($row['title']) . '">';
-        echo '  </div>';
-        echo '  <div class="roomInfo">';
-        echo '    <h3>' . htmlspecialchars($row['title']) . '</h3>';
-        echo '    <p>' . htmlspecialchars($row['description']) . '</p>';
-        echo '    <ul>';
-        echo '      <li><strong>Guest Number:</strong> ' . htmlspecialchars($row['guest_number']) . '</li>';
-        echo '      <li><strong>Price:</strong> $' . htmlspecialchars($row['price']) . '/night</li>';
-        echo '      <li><strong>Availability:</strong> ' . ($row['availability'] ? 'Available' : 'Unavailable (until ' . htmlspecialchars($row['departure_date']) . ')') . '</li>';
-        echo '    </ul>';
-        if ($row['availability']) {
-          echo '    <a href="reserve_room.php?id=' . $row['room_id'] . '" class="btn btn-reserve">Reserve</a>';
-        }
-        echo '  </div>';
-        echo '</div>';
-      }
-    } else {
-      echo "<p>No rooms found</p>";
-    }
-
-    mysqli_close($connect);
-    ?>
-
-
-
-  </div>
   <footer class="footer">
     <img src="../images/logo.jpg" alt="" />
 

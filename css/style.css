@@ -115,3 +115,10 @@ body {
 .footer i {
   color: var(--secondary-color);
 }
+
+.welcome_text {
+  font-size: 24px;
+  font-weight: 800;
+  font-family: var(--header-font);
+  color: var(--text-dark);
+}

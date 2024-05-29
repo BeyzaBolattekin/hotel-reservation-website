@@ -1,0 +1,94 @@
+.reserve-container {
+  width: 40%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.reserve-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+.reserve-container .mb-3 {
+  margin-bottom: 15px;
+}
+
+.reserve-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.reserve-container input,
+.reserve-container textarea,
+.reserve-container select {
+  width: fit-content;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.reserve-container input::-webkit-calendar-picker-indicator {
+  filter: invert(0);
+}
+
+.reserve-wrapper {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.img-price-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.img-price-wrapper img {
+  width: 200px;
+  height: 150px;
+}
+
+.reserve-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.reserve-container button:hover {
+  background-color: #45a049;
+}
+
+.reserve-container .price-display {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.reserve-container #confirm_section {
+  margin-top: 20px;
+}
+
+.reserve-container .total-price-display {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
