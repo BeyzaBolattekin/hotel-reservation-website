@@ -37,7 +37,8 @@ body {
 }
 
 .navbar {
-  background-color: #fff;
+  background: linear-gradient(45deg, #e9f7f6 7%, #fff 10%, #fff 100%);
+  background-color: #e9f7f6;
   position: absolute;
   top: -20px;
   left: 5%;
@@ -66,7 +67,7 @@ body {
 }
 
 .home-container {
-  background-image: url("../images/home.jpg");
+  background-image: url(../images/home.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 85vh;

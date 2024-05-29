@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rooms</title>
-    <link rel="stylesheet" href="/styles/rooms.css" />
+    <link rel="stylesheet" href="../css/rooms.css" />
   </head>
   <body>
-    <nav class="navbar">
-      <img src="/images/logo.jpg" alt="logo" id="logo" />
-      <ul class="nav-items">
-        <li><a href="/pages/home.html">Home</a></li>
-        <li><a href="/pages/about.html">About</a></li>
-        <li><a href="/pages/features.html">Facilities</a></li>
-        <li><a href="/pages/rooms.html">Rooms</a></li>
-        <li><a href="/pages/login.html">Login</a></li>
-      </ul>
-    </nav>
+  <nav class="navbar">
+        <img src="../images/logo.jpg" alt="logo" id="logo" />
+        <ul class="nav-items">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./features.html">Facilities</a></li>
+          <li><a href="./rooms.php">Rooms</a></li>
+          <li><a href="./login.php">Login</a></li>
+        </ul>
+      </nav>
     <div class="formContainer">
       <form class="roomForm">
         <div class="arrivalDiv inputDiv">
@@ -39,7 +39,7 @@
     <div class="roomsContainer">
       <div class="roomCard">
         <div class="roomImg">
-          <img src="/images/onePerson.jpg" alt="room1" />
+          <img src="../images/onePerson.jpg" alt="room1" />
         </div>
         <div class="roomInfo">
           <h3>Single Room</h3>
@@ -52,7 +52,7 @@
       </div>
       <div class="roomCard">
         <div class="roomImg">
-          <img src="/images/honeyMoon.jpg" alt="room1" />
+          <img src="../images/honeyMoon.jpg" alt="room1" />
         </div>
         <div class="roomInfo">
           <h3>Honeymoon Suit</h3>
@@ -66,7 +66,7 @@
       </div>
       <div class="roomCard">
         <div class="roomImg">
-          <img src="/images/famillyRoom.jpg" alt="room1" />
+          <img src="../images/famillyRoom.jpg" alt="room1" />
         </div>
         <div class="roomInfo">
           <h3>Family Room</h3>
@@ -79,7 +79,7 @@
       </div>
     </div>
     <footer class="footer">
-      <img src="/images/logo.jpg" alt="" />
+      <img src="../images/logo.jpg" alt="" />
 
       <div class="footerContactUs">
         <h3 class="footerItem">Contact us!</h3>

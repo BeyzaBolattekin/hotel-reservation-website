@@ -2,6 +2,6 @@
     $servername = "localhost";
     $userdb = "root";
     $pass = "";
-    $dbname = "hoteldb";
+    $dbname = "dbhotel";
     $connect=mysqli_connect($servername,$userdb,$pass,$dbname);
 ?>

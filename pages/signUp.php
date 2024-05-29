@@ -10,8 +10,8 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles/signUp.css"/>
     <title>Sign Up</title>
+    <link rel="stylesheet" href="../css/signUp.css"/>
   </head>
   <body>
     <div class="container">
@@ -47,16 +47,7 @@
           <span id="password-eye"><i class="ri-eye-off-line"></i></span>
         </div>
         <button type="submit" class="login__btn" name="submit" >Sign Up</button>
-      
-     <div>Have an account? <a href="login.php">Log in</a></div>
-      </form>
-    </div>
-
-
-    <script src="/js/signUp.js"></script>
-  </body>
-</html>
-<?php
+        <?php
         include("con_data.php");
           if($_SERVER["REQUEST_METHOD"] == "POST")
           {
@@ -83,12 +74,23 @@
             }
             else
             {
-              $sql = "INSERT INTO user(firstname,lastname,email,password) VALUES('$firstname','$lastname','$email','$password')";
+              $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+              $sql = "INSERT INTO user(firstname,lastname,email,password) VALUES('$firstname','$lastname','$email','$passwordHash')";
               mysqli_query($connect, $sql);
-              
+              header("Location: login.php");
               echo"You are now registered<br>";
             }  
           }
           mysqli_close($connect);
-          header("Location:login.php")
+          
         ?>
+      
+     <div>Have an account? <a href="login.php">Log in</a></div>
+      </form>
+    </div>
+
+
+    <script src="../js/signUp.js"></script>
+  </body>
+</html>

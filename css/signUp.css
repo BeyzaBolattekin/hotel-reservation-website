@@ -25,7 +25,7 @@ input {
 }
 
 .container {
-  background-image: url(/images/loginPictures.jpg);
+  background-image: url(../images/loginPictures.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -44,7 +44,6 @@ input {
   border: 2px solid #fff;
   border-radius: 1.5rem;
   text-align: center;
-
   opacity: 0;
   transform: translateY(50px);
   animation: show 0.5s linear forwards;
