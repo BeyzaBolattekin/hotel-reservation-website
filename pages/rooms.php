@@ -1,5 +1,7 @@
 <?php
-session_start(); ?>
+session_start();
+$user_id = $_SESSION['user_id'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,47 +11,36 @@ session_start(); ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rooms</title>
   <link rel="stylesheet" href="../css/rooms.css" />
+
 </head>
 
 <body>
-  <nav class="navbar">
-    <img src="../images/logo.jpg" alt="logo" id="logo" />
-    <ul class="nav-items">
-      <li><a href="../index.php">Home</a></li>
-      <li><a href="./about.php">About</a></li>
-      <li><a href="./features.php">Facilities</a></li>
-      <li><a href="./rooms.php">Rooms</a></li>
 
-      <?php if (isset($_SESSION['user_id'])) : ?>
-        <h1 class="welcome_text">Welcome, <?php echo htmlspecialchars($_SESSION['firstname']); ?>!</h1>
-        <a href="./logout.php">Logout</a>
-      <?php else : ?>
-        <li><a href="./signUp.php">Register</a></li>
-        <li><a href="./login.php">Login</a></li>
-      <?php endif; ?>
+  <?php include_once './include/navbar.php'; ?>
 
-    </ul>
-  </nav>
   <div class="formContainer">
-    <form class="roomForm">
+    <form class="roomForm" id="roomFilterForm">
       <div class="arrivalDiv inputDiv">
         <p>Arrival Date</p>
-        <input type="date" />
+        <input type="date" id="arrivalDate" name="arrival_date" required />
       </div>
       <div class="departureDiv inputDiv">
         <p>Departure Date</p>
-        <input type="date" />
+        <input type="date" id="departureDate" name="departure_date" required />
       </div>
       <div class="guestsDiv inputDiv">
         <p>Guests</p>
-        <input type="number" />
+        <input type="number" id="guests" name="guests" required />
       </div>
       <div class="checkBtn">
-        <button>Check Rooms</button>
+        <button type="submit">Check Rooms</button>
       </div>
     </form>
   </div>
-  <div class="roomsContainer">
+
+
+
+  <div id="roomResults" class="roomsContainer">
 
 
     <?php
@@ -60,7 +51,7 @@ session_start(); ?>
 
     if (mysqli_num_rows($result) > 0) {
       while ($row = mysqli_fetch_assoc($result)) {
-        echo '<div class="roomCard ' . ($row['availability'] ? '' : 'unavailable') . '">';
+        echo '<div class="roomCard">';
         echo '  <div class="roomImg">';
         echo '    <img src="' . htmlspecialchars($row['img']) . '" alt="' . htmlspecialchars($row['title']) . '">';
         echo '  </div>';
@@ -70,11 +61,8 @@ session_start(); ?>
         echo '    <ul>';
         echo '      <li><strong>Guest Number:</strong> ' . htmlspecialchars($row['guest_number']) . '</li>';
         echo '      <li><strong>Price:</strong> $' . htmlspecialchars($row['price']) . '/night</li>';
-        echo '      <li><strong>Availability:</strong> ' . ($row['availability'] ? 'Available' : 'Unavailable (until ' . htmlspecialchars($row['departure_date']) . ')') . '</li>';
         echo '    </ul>';
-        if ($row['availability']) {
-          echo '    <a href="reserve_room.php?id=' . $row['room_id'] . '" class="btn btn-reserve">Reserve</a>';
-        }
+
         echo '  </div>';
         echo '</div>';
       }
@@ -88,7 +76,7 @@ session_start(); ?>
 
 
   </div>
-  <footer class="footer">
+  <!-- <footer class="footer">
     <img src="../images/logo.jpg" alt="" />
 
     <div class="footerContactUs">
@@ -125,7 +113,59 @@ session_start(); ?>
         <p>Golden Smile Hotel</p>
       </div>
     </div>
-  </footer>
+  </footer> -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const userId = <?php echo json_encode($user_id); ?>;
+
+      document.getElementById('roomFilterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const arrivalDate = document.getElementById('arrivalDate').value;
+        const departureDate = document.getElementById('departureDate').value;
+        const guests = document.getElementById('guests').value;
+
+        fetch(`filter_rooms.php?arrival_date=${arrivalDate}&departure_date=${departureDate}&guests=${guests}`)
+          .then(response => response.json())
+          .then(data => {
+            const roomResults = document.getElementById('roomResults');
+            roomResults.innerHTML = '';
+
+            if (data.length > 0) {
+              data.forEach(room => {
+                const roomDiv = document.createElement('div');
+                roomDiv.classList.add('roomCard');
+                roomDiv.innerHTML = `
+              <div class="roomImg">
+                <img src="${room.img}" alt="${room.title}" width="100">
+              </div>
+              <div class="roomInfo">
+                <h3>${room.title}</h3>
+                <p>${room.description}</p>
+                <ul>
+                  <li><strong>Guest Number:</strong> ${room.guest_number}</li>
+                  <li><strong>Price:</strong> $${room.price} per night</li>
+                </ul>
+
+                ${userId ? `<a href="reserve_room.php?id=${room.room_id}" class="btn btn-reserve">Reserve</a>` : ''}              
+
+
+              </div>
+            `;
+                roomResults.appendChild(roomDiv);
+              });
+            } else {
+              roomResults.innerHTML = '<p>No rooms available for the selected criteria.</p>';
+            }
+          })
+          .catch(error => console.error('Error:', error));
+      })
+    });;
+  </script>
+
+
 </body>
 <script src="https://kit.fontawesome.com/b022f45a64.js" crossorigin="anonymous"></script>
 

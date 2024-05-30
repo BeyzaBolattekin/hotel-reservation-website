@@ -42,13 +42,7 @@
                                 <label for="img" class="form-label">Image</label>
                                 <input type="file" class="form-control" id="img" name="img" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="availability" class="form-label">Status</label>
-                                <select class="form-select" id="availability" name="availability" required>
-                                    <option value="1">Active</option>
-                                    <option value="2">Inactive</option>
-                                </select>
-                            </div>
+
                             <div class=' mb-3'>
                                 <label for="guest_number" class="form-label">Guest Number</label>
                                 <select name="guest_number" id="guest_number">
@@ -73,7 +67,7 @@
                                 $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
                                 $desc = filter_input(INPUT_POST, "desc", FILTER_SANITIZE_SPECIAL_CHARS);
                                 $price = filter_input(INPUT_POST, "price", FILTER_SANITIZE_SPECIAL_CHARS);
-                                $availability = filter_input(INPUT_POST, "availability", FILTER_SANITIZE_SPECIAL_CHARS);
+
                                 $guest_number = filter_input(INPUT_POST, "guest_number", FILTER_SANITIZE_SPECIAL_CHARS);
 
                                 // Dosya yükleme işlemi
@@ -112,8 +106,6 @@
                                     echo ("Please enter a description.<br>");
                                 } elseif (empty($price)) {
                                     echo ("Please enter a price.<br>");
-                                } elseif (empty($availability)) {
-                                    echo ("Please enter an availability.<br>");
                                 } elseif (empty($guest_number)) {
                                     echo ("Please enter a guest number.<br>");
                                 } else {
@@ -121,7 +113,7 @@
 
 
 
-                                    $sql = "INSERT INTO rooms(guest_number,price,availability,title,description,img) VALUES ('$guest_number','$price','$availability','$title', '$desc', '$img_file')";
+                                    $sql = "INSERT INTO rooms(guest_number,price,title,description,img) VALUES ('$guest_number','$price','$title', '$desc', '$img_file')";
                                     mysqli_query($connect, $sql);
                                     echo "You are now created<br>";
                                 }
@@ -145,7 +137,6 @@
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Price</th>
-                                <th>Status</th>
                                 <th>Guest Number</th>
                                 <th>Image</th>
                                 <th>Actions</th>
@@ -165,11 +156,11 @@
                                     echo "<td>" . $row['title'] . "</td>";
                                     echo "<td>" . $row['description'] . "</td>";
                                     echo "<td>" . $row['price'] . "</td>";
-                                    echo "<td>" . ($row['availability'] ? 'Active' : 'Inactive') . "</td>";
+
                                     echo "<td>" . $row['guest_number'] . "</td>";
                                     echo "<td><img src='" . $row['img'] . "' alt='Room Image' width='100'></td>";
                                     echo "<td>";
-                                    echo "<a href='edit_room.php?id=" . $row['room_id'] . "'>Edit</a> | ";
+
                                     echo "<a href='delete_room.php?id=" . $row['room_id'] . "'>Delete</a>";
                                     echo "</td>";
                                     echo "</tr>";

@@ -1,6 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #0f1a2c;
+  --secondary-color: #ffc343;
+  --text-dark: #0f172a;
+  --text-light: #64748b;
+  --header-font: "Playfair Display", serif;
+}
+
 .reserve-container {
   width: 40%;
-  margin: 20px auto;
   padding: 20px;
   background-color: white;
   border-radius: 8px;

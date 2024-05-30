@@ -1,7 +1,14 @@
-<?php session_start();
-include_once('../include/databaseconn.php');
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 
+include("../pages/con_data.php");
 
+$sql = "SELECT * FROM user";
+$result = mysqli_query($connect, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -18,9 +25,20 @@ include_once('../include/databaseconn.php');
     <link href="./styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     <style>
+        main {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: 80%;
+            border: 1px solid #ddd;
         }
 
         th,
@@ -78,62 +96,36 @@ include_once('../include/databaseconn.php');
         <?php include_once('include/sidebar.php'); ?>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4">
+                <!-- Oda yönetim tablosu -->
+                <h2>Existing Users</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
 
-                    <?php
-                    $email = $_SESSION['email'];
-                    $sql = "select id,name,email,created_at from users where user_type='user' order by created_at asc ";
-                    $result = $connection->query($sql);
-                    $data = [];
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            array_push($data, $row);
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>" . htmlspecialchars($row['user_id']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['firstname']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['lastname']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>No users found</td></tr>";
                         }
-                    } ?>
-                    <?php
-                    if (isset($_GET['msg']) && $_GET['msg'] == 2) {
-                        echo "<script>alert('category deleted successfully.')</script>";
-                    }
-                    if (isset($_GET['msg']) && $_GET['msg'] == 3) {
-                        echo "<script>alert('category not deleted.')</script>";
-                    }
-                    ?>
-                    <h3>Users Information</h3>
-                    <table>
-                        <thread>
-                            <tr>
-                                <th>SN</th>
-                                <th>User ID</th>
-                                <th>Name</th>
-                                <th>E-mail</th>
-                                <th>Created at</th>
-                                <th>Action</th>
-
-                            </tr>
-                            <tbody>
-                                <?php if (count($data) > 0) { ?>
-                                    <?php foreach ($data as $key => $record) { ?>
-                                        <tr>
-                                            <td><?php echo  $key + 1; ?></td>
-                                            <td><?php echo $record['id']; ?></td>
-                                            <td><?php echo $record['name']; ?></td>
-                                            <td><?php echo $record['email']; ?></td>
-                                            <td><?php echo $record['created_at']; ?></td>
-                                            <td class="action_column">
-
-                                                <a href="cancel_booking.php?id=<?php echo $record['id']; ?>" class="delete" onclick="return confirm('Are you sure to delete this user!');">delete</a>
-                                            </td>
-                                        </tr>
-                                    <?php }; ?>
-                                <?php } else { ?>
-                                    <tr>
-                                        <td colspan="6">NO categories found in database</td>
-                                    </tr>
-                                <?php }; ?>
-                            </tbody>
-                        </thread>
-                    </table>
-                </div>
+                        mysqli_close($connect);
+                        ?>
+                    </tbody>
+                </table>
             </main>
             <?php include_once('../include/footer.php'); ?>
         </div>

@@ -2,12 +2,9 @@
 
 :root {
   --primary-color: #0f1a2c;
-  --secondary-color: #f6ac0f;
+  --secondary-color: #ffc343;
   --text-dark: #0f172a;
   --text-light: #64748b;
-  --extra-light: #f8fafc;
-  --white: #ffffff;
-  --max-width: 1200px;
   --header-font: "Playfair Display", serif;
 }
 

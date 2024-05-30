@@ -35,13 +35,12 @@ body {
   display: flex;
   align-items: center;
 }
-
 .navbar {
-  background: linear-gradient(45deg, #e9f7f6 7%, #fff 10%, #fff 100%);
-  background-color: #e9f7f6;
-  position: absolute;
-  top: -20px;
+  position: fixed;
+  top: 20px;
   left: 5%;
+  z-index: 1000;
+  background-color: #fff;
   height: 80px;
   width: 90%;
   display: flex;
@@ -64,6 +63,7 @@ body {
 .navbar img {
   height: 80px;
   width: 80px;
+  border-radius: 15px;
 }
 
 .home-container {

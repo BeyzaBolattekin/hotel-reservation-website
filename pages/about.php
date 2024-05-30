@@ -15,24 +15,9 @@ session_start();
 
 <body>
   <section class="about" id="about">
-    <nav class="navbar">
-      <img src="../images/logo.jpg" alt="logo" id="logo" />
-      <ul class="nav-items">
-        <li><a href="../index.php">Home</a></li>
-        <li><a href="./about.php">About</a></li>
-        <li><a href="./features.php">Facilities</a></li>
-        <li><a href="./rooms.php">Rooms</a></li>
 
-        <?php if (isset($_SESSION['user_id'])) : ?>
-          <h1 class="welcome_text">Welcome, <?php echo htmlspecialchars($_SESSION['firstname']); ?>!</h1>
-          <a href="./logout.php">Logout</a>
-        <?php else : ?>
-          <li><a href="./signUp.php">Register</a></li>
-          <li><a href="./login.php">Login</a></li>
-        <?php endif; ?>
+    <?php include_once './include/navbar.php'; ?>
 
-      </ul>
-    </nav>
     <div class="section__container about__container">
       <div class="about__grid">
         <div class="about__image">
